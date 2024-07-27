@@ -6,13 +6,15 @@ fun englishTokenizer(words: List<String>): ArrayList<String> {
     val wordsFound = ArrayList<String>()
 
     for (word in words) {
+        var wordClean = word.replace(",", "").replace(".", "")
+
         for (englishWord in dictionary) {
-            if (englishWord.verb == word.lowercase()) {
-                wordsFound.add(word)
+            if (englishWord.verb == wordClean.lowercase()) {
+                wordsFound.add(wordClean)
             }
 
-            if (word.lowercase() in englishWord.derivations) {
-                wordsFound.add(word)
+            if (wordClean.lowercase() in englishWord.derivations) {
+                wordsFound.add(wordClean)
             }
         }
     }
