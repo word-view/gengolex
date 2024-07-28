@@ -1,4 +1,4 @@
-package cc.wordview.gengolex.japanese
+package cc.wordview.gengolex.languages.japanese
 
 class KanjiWord(
     val kanji: String,
