@@ -1,8 +1,8 @@
 import cc.wordview.gengolex.Language
 import cc.wordview.gengolex.findWords
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
-import kotlin.test.assertTrue
 
 class ParserTest {
     @Test
@@ -22,7 +22,23 @@ class ParserTest {
 
     @Test
     fun findJapaneseWords() {
-        // "僕は走っています", "走ってた", "走る"
+        var words = findWords("僕は走っています", Language.JAPANESE)
+        assertTrue(words.single() == "走っています")
+
+        words = findWords("走ってた", Language.JAPANESE)
+        assertTrue(words.single() == "走ってた")
+
+        words = findWords("走る", Language.JAPANESE)
+        assertTrue(words.single() == "走る")
+
+        words = findWords("僕は走っています、走ってた、走る。", Language.JAPANESE)
+        assertEquals(3, words.size)
+
+        words = findWords("僕は走っています走ってた走る", Language.JAPANESE)
+        assertEquals(3, words.size)
+
+        words = findWords("走る、走ってた、僕は走っています。", Language.JAPANESE)
+        assertEquals(3, words.size)
     }
 
     @Test
