@@ -1,5 +1,5 @@
 import cc.wordview.gengolex.Language
-import cc.wordview.gengolex.findWords
+import cc.wordview.gengolex.Parser
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
@@ -7,56 +7,61 @@ import org.junit.jupiter.api.Test
 class ParserTest {
     @Test
     fun findEnglishWords() {
-        var words = findWords("Run", Language.ENGLISH)
+        val parser = Parser(Language.ENGLISH)
+
+        var words = parser.findWords("Run")
         assertTrue(words.single() == "Run")
 
-        words = findWords("I am running", Language.ENGLISH)
+        words = parser.findWords("I am running")
         assertTrue(words.single() == "running")
 
-        words = findWords("I ran", Language.ENGLISH)
+        words = parser.findWords("I ran")
         assertTrue(words.single() == "ran")
 
-        words = findWords("I run, i ran, i am running.", Language.ENGLISH)
+        words = parser.findWords("I run, i ran, i am running.")
         assertEquals(3, words.size)
     }
 
     @Test
     fun findJapaneseWords() {
-        var words = findWords("僕は走っています", Language.JAPANESE)
+        val parser = Parser(Language.JAPANESE)
+
+        var words = parser.findWords("僕は走っています")
         assertTrue(words.single() == "走っています")
 
-        words = findWords("走ってた", Language.JAPANESE)
+        words = parser.findWords("走ってた")
         assertTrue(words.single() == "走ってた")
 
-        words = findWords("走る", Language.JAPANESE)
+        words = parser.findWords("走る")
         assertTrue(words.single() == "走る")
 
-        words = findWords("僕は走っています、走ってた、走る。", Language.JAPANESE)
+        words = parser.findWords("僕は走っています、走ってた、走る。")
         assertEquals(3, words.size)
 
-        words = findWords("僕は走っています走ってた走る", Language.JAPANESE)
+        words = parser.findWords("僕は走っています走ってた走る")
         assertEquals(3, words.size)
 
-        words = findWords("走る、走ってた、僕は走っています。", Language.JAPANESE)
+        words = parser.findWords("走る、走ってた、僕は走っています。")
         assertEquals(3, words.size)
     }
 
     @Test
     fun findPortugueseWords() {
-        // "Estou correndo", "Corri", "Corra"
-        var words = findWords("Correr", Language.PORTUGUESE)
+        val parser = Parser(Language.PORTUGUESE)
+
+        var words = parser.findWords("Correr")
         assertTrue(words.single() == "Correr")
 
-        words = findWords("Estou correndo", Language.PORTUGUESE)
+        words = parser.findWords("Estou correndo")
         assertTrue(words.single() == "correndo")
 
-        words = findWords("Corri", Language.PORTUGUESE)
+        words = parser.findWords("Corri")
         assertTrue(words.single() == "Corri")
 
-        words = findWords("Corra", Language.PORTUGUESE)
+        words = parser.findWords("Corra")
         assertTrue(words.single() == "Corra")
 
-        words = findWords("Correr, correndo, corri, corra", Language.PORTUGUESE)
+        words = parser.findWords("Correr, correndo, corri, corra")
         assertEquals(4, words.size)
     }
 }
