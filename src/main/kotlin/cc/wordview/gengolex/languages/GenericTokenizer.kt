@@ -2,12 +2,12 @@ package cc.wordview.gengolex.languages
 
 /**
  * Represents a strategy for languages that separate
- * words by whitespaces (e.g. portuguese, english, spanish).
- * Since the algorithm is virtually the same the only thing that
+ * words by whitespaces and have only one writing system (e.g. portuguese, english, spanish).
+ * Since the algorithm is the same the only thing that
  * is needed to support this kind of language is to define its dictionary.
  */
 abstract class GenericTokenizer : Tokenizer {
-    abstract override val dictionary: List<Verb>
+    abstract val dictionary: List<Verb>
 
     override fun tokenize(words: List<String>): ArrayList<String> {
         val wordsFound = ArrayList<String>()

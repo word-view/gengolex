@@ -5,9 +5,11 @@ import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
 class ParserTest {
+    private val testResourcesPath = object {}.javaClass.classLoader.getResource("")?.toString()?.replace("file:", "")
+
     @Test
     fun findEnglishWords() {
-        val parser = Parser(Language.ENGLISH)
+        val parser = Parser(Language.ENGLISH, "${testResourcesPath}/dictionaries/")
 
         var words = parser.findWords("Run")
         assertTrue(words.single() == "Run")
@@ -24,7 +26,7 @@ class ParserTest {
 
     @Test
     fun findJapaneseWords() {
-        val parser = Parser(Language.JAPANESE)
+        val parser = Parser(Language.JAPANESE, "${testResourcesPath}/dictionaries/")
 
         var words = parser.findWords("僕は走っています")
         assertTrue(words.single() == "走っています")
@@ -47,7 +49,9 @@ class ParserTest {
 
     @Test
     fun findPortugueseWords() {
-        val parser = Parser(Language.PORTUGUESE)
+        val parser = Parser(
+            Language.PORTUGUESE, "${testResourcesPath}/dictionaries/"
+        )
 
         var words = parser.findWords("Correr")
         assertTrue(words.single() == "Correr")

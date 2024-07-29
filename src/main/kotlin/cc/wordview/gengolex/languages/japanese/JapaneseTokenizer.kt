@@ -1,14 +1,16 @@
 package cc.wordview.gengolex.languages.japanese
 
+import cc.wordview.gengolex.languages.Tokenizer
 import cc.wordview.gengolex.languages.Verb
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import java.io.File
 import java.util.regex.Pattern
 
-object JapaneseTokenizer : IJapaneseTokenizer {
-    override val kanjiDictionary: List<KanjiWord> = listOf(
-        KanjiWord("走", listOf("走る", "走ってた", "走っています"))
-    )
-    override val hiraganaDictionary: List<Verb> = listOf()
-    override val katakanaDictionary: List<Verb> = listOf()
+object JapaneseTokenizer : Tokenizer {
+    var kanjiDictionary: List<KanjiWord> = listOf()
+    var hiraganaDictionary: List<Verb> = listOf()
+    var katakanaDictionary: List<Verb> = listOf()
 
     override fun tokenize(words: List<String>): ArrayList<String> {
         val wordsByChars = words.joinToString()
@@ -47,6 +49,20 @@ object JapaneseTokenizer : IJapaneseTokenizer {
         }
 
         return wordsFound
+    }
+
+    override fun initializeDictonary(path: String) {
+        // Only initialize kanji for now
+        val kanjiDictionaryJson = File("$path/kanji.json")
+            .inputStream()
+            .readBytes()
+            .toString(Charsets.UTF_8)
+
+        val typeToken = object : TypeToken<List<KanjiWord>>() {}.type
+
+        val parsedDictionary = Gson().fromJson<List<KanjiWord>>(kanjiDictionaryJson, typeToken)
+
+        kanjiDictionary = parsedDictionary
     }
 
 
