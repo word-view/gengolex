@@ -1,10 +1,12 @@
 package cc.wordview.gengolex.languages.japanese
 
+import cc.wordview.gengolex.NoDictionaryException
 import cc.wordview.gengolex.languages.Tokenizer
 import cc.wordview.gengolex.languages.Verb
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.io.File
+import java.util.HashMap
 import java.util.regex.Pattern
 
 object JapaneseTokenizer : Tokenizer {
@@ -51,18 +53,34 @@ object JapaneseTokenizer : Tokenizer {
         return wordsFound
     }
 
-    override fun initializeDictonary(path: String) {
+    override fun initializeDictionary(path: String) {
         // Only initialize kanji for now
         val kanjiDictionaryJson = File("$path/kanji.json")
             .inputStream()
             .readBytes()
             .toString(Charsets.UTF_8)
 
+        if (kanjiDictionaryJson.isEmpty())
+            throw NoDictionaryException("Unable to find a dictionary for kanji")
+
         val typeToken = object : TypeToken<List<KanjiWord>>() {}.type
 
         val parsedDictionary = Gson().fromJson<List<KanjiWord>>(kanjiDictionaryJson, typeToken)
 
         kanjiDictionary = parsedDictionary
+    }
+
+    override fun initializeDictionary(dictionaries: HashMap<String, String>) {
+        val kanjiDictionary = dictionaries["kanji"]
+
+        if (kanjiDictionary.isNullOrEmpty())
+            throw NoDictionaryException("Unable to find a dictionary for kanji")
+
+        val typeToken = object : TypeToken<List<KanjiWord>>() {}.type
+
+        val parsedDictionary = Gson().fromJson<List<KanjiWord>>(kanjiDictionary, typeToken)
+
+        this.kanjiDictionary = parsedDictionary
     }
 
 
