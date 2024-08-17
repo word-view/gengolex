@@ -10,7 +10,7 @@ import java.util.HashMap
 import java.util.regex.Pattern
 
 object JapaneseTokenizer : Tokenizer {
-    var kanjiDictionary: List<KanjiWord> = listOf()
+    var kanjiDictionary: List<Verb> = listOf()
     var hiraganaDictionary: List<Verb> = listOf()
     var katakanaDictionary: List<Verb> = listOf()
 
@@ -63,9 +63,9 @@ object JapaneseTokenizer : Tokenizer {
         if (kanjiDictionaryJson.isEmpty())
             throw NoDictionaryException("Unable to find a dictionary for kanji")
 
-        val typeToken = object : TypeToken<List<KanjiWord>>() {}.type
+        val typeToken = object : TypeToken<List<Verb>>() {}.type
 
-        val parsedDictionary = Gson().fromJson<List<KanjiWord>>(kanjiDictionaryJson, typeToken)
+        val parsedDictionary = Gson().fromJson<List<Verb>>(kanjiDictionaryJson, typeToken)
 
         kanjiDictionary = parsedDictionary
     }
@@ -76,9 +76,9 @@ object JapaneseTokenizer : Tokenizer {
         if (kanjiDictionary.isNullOrEmpty())
             throw NoDictionaryException("Unable to find a dictionary for kanji")
 
-        val typeToken = object : TypeToken<List<KanjiWord>>() {}.type
+        val typeToken = object : TypeToken<List<Verb>>() {}.type
 
-        val parsedDictionary = Gson().fromJson<List<KanjiWord>>(kanjiDictionary, typeToken)
+        val parsedDictionary = Gson().fromJson<List<Verb>>(kanjiDictionary, typeToken)
 
         this.kanjiDictionary = parsedDictionary
     }
@@ -94,9 +94,9 @@ object JapaneseTokenizer : Tokenizer {
 
 
         for (kanjiWord in kanjiDictionary) {
-            if (kanjiWord.kanji == char) {
+            if (kanjiWord.verb == char) {
                 // if no derivations are found the word is the plain kanji itself
-                foundKanjiWord = kanjiWord.kanji
+                foundKanjiWord = kanjiWord.verb
 
                 for (derivation in kanjiWord.derivations) {
                     if (original.contains(derivation)) {

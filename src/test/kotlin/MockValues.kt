@@ -12,7 +12,7 @@ const val englishDictionaryJsonString = "[\n" +
 
 const val kanjiDictionaryJsonString = "[\n" +
         "  {\n" +
-        "    \"kanji\": \"走\",\n" +
+        "    \"verb\": \"走\",\n" +
         "    \"derivations\": [\n" +
         "      \"走る\", \"走ってた\", \"走っています\"\n" +
         "    ]\n" +
