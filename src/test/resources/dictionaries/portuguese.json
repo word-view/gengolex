@@ -1,10 +1,20 @@
 [
   {
-    "verb": "correr",
+    "parent": "run",
+    "word": "correr",
     "derivations": [
-      "corri",
-      "correndo",
-      "corra"
+      {
+        "parent": "ran",
+        "word": "corri"
+      },
+      {
+        "parent": "running",
+        "word": "correndo"
+      },
+      {
+        "parent": "run",
+        "word": "corra"
+      }
     ]
   }
 ]

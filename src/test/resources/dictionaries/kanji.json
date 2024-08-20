@@ -1,8 +1,20 @@
 [
   {
-    "verb": "走",
+    "parent": "run",
+    "word": "走",
     "derivations": [
-      "走る", "走ってた", "走っています"
+      {
+        "parent": "run",
+        "word": "走る"
+      },
+      {
+        "parent": "ran",
+        "word": "走ってた"
+      },
+      {
+        "parent": "run",
+        "word": "走っています"
+      }
     ]
   }
 ]

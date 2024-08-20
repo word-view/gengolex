@@ -12,13 +12,13 @@ class ParserTest {
         val parser = Parser(Language.ENGLISH, "${testResourcesPath}/dictionaries/")
 
         var words = parser.findWords("Run")
-        assertTrue(words.single() == "Run")
+        assertEquals("run", words.single().word)
 
         words = parser.findWords("I am running")
-        assertTrue(words.single() == "running")
+        assertEquals("running", words.single().word)
 
         words = parser.findWords("I ran")
-        assertTrue(words.single() == "ran")
+        assertEquals("ran", words.single().word)
 
         words = parser.findWords("I run, i ran, i am running.")
         assertEquals(3, words.size)
@@ -29,13 +29,13 @@ class ParserTest {
         val parser = Parser(Language.JAPANESE, "${testResourcesPath}/dictionaries/")
 
         var words = parser.findWords("僕は走っています")
-        assertTrue(words.single() == "走っています")
+        assertEquals("走っています", words.single().word)
 
         words = parser.findWords("走ってた")
-        assertTrue(words.single() == "走ってた")
+        assertEquals("走ってた", words.single().word)
 
         words = parser.findWords("走る")
-        assertTrue(words.single() == "走る")
+        assertEquals("走る", words.single().word)
 
         words = parser.findWords("僕は走っています、走ってた、走る。")
         assertEquals(3, words.size)
@@ -54,16 +54,16 @@ class ParserTest {
         )
 
         var words = parser.findWords("Correr")
-        assertTrue(words.single() == "Correr")
+        assertEquals("correr", words.single().word)
 
         words = parser.findWords("Estou correndo")
-        assertTrue(words.single() == "correndo")
+        assertEquals("correndo", words.single().word)
 
         words = parser.findWords("Corri")
-        assertTrue(words.single() == "Corri")
+        assertEquals("corri", words.single().word)
 
         words = parser.findWords("Corra")
-        assertTrue(words.single() == "Corra")
+        assertEquals("corra", words.single().word)
 
         words = parser.findWords("Correr, correndo, corri, corra")
         assertEquals(4, words.size)
@@ -99,13 +99,13 @@ class ParserTest {
         parser.addDictionary("english", englishDictionaryJsonString)
 
         var words = parser.findWords("Run")
-        assertTrue(words.single() == "Run")
+        assertEquals("run", words.single().word)
 
         words = parser.findWords("I am running")
-        assertTrue(words.single() == "running")
+        assertEquals("running", words.single().word)
 
         words = parser.findWords("I ran")
-        assertTrue(words.single() == "ran")
+        assertEquals("ran", words.single().word)
 
         words = parser.findWords("I run, i ran, i am running.")
         assertEquals(3, words.size)
@@ -117,13 +117,13 @@ class ParserTest {
         parser.addDictionary("kanji", kanjiDictionaryJsonString)
 
         var words = parser.findWords("僕は走っています")
-        assertTrue(words.single() == "走っています")
+        assertEquals("走っています", words.single().word)
 
         words = parser.findWords("走ってた")
-        assertTrue(words.single() == "走ってた")
+        assertEquals("走ってた", words.single().word)
 
         words = parser.findWords("走る")
-        assertTrue(words.single() == "走る")
+        assertEquals("走る", words.single().word)
 
         words = parser.findWords("僕は走っています、走ってた、走る。")
         assertEquals(3, words.size)
@@ -141,16 +141,16 @@ class ParserTest {
         parser.addDictionary("portuguese", portugueseDictionaryJsonString)
 
         var words = parser.findWords("Correr")
-        assertTrue(words.single() == "Correr")
+        assertEquals("correr", words.single().word)
 
         words = parser.findWords("Estou correndo")
-        assertTrue(words.single() == "correndo")
+        assertEquals("correndo", words.single().word)
 
         words = parser.findWords("Corri")
-        assertTrue(words.single() == "Corri")
+        assertEquals("corri", words.single().word)
 
         words = parser.findWords("Corra")
-        assertTrue(words.single() == "Corra")
+        assertEquals("corra", words.single().word)
 
         words = parser.findWords("Correr, correndo, corri, corra")
         assertEquals(4, words.size)

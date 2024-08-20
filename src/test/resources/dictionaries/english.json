@@ -1,9 +1,16 @@
 [
   {
-    "verb": "run",
+    "parent": "run",
+    "word": "run",
     "derivations": [
-      "running",
-      "ran"
+      {
+        "parent": "running",
+        "word": "running"
+      },
+      {
+        "parent": "ran",
+        "word": "ran"
+      }
     ]
   }
 ]

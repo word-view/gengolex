@@ -7,21 +7,23 @@ package cc.wordview.gengolex.languages
  * is needed to support this kind of language is to define its dictionary.
  */
 abstract class GenericTokenizer : Tokenizer {
-    abstract val dictionary: List<Verb>
+    abstract val dictionary: List<DerivatableWord>
 
-    override fun tokenize(words: List<String>): ArrayList<String> {
-        val wordsFound = ArrayList<String>()
+    override fun tokenize(words: List<String>): ArrayList<Word> {
+        val wordsFound = ArrayList<Word>()
 
         for (word in words) {
             val wordClean = word.replace(",", "").replace(".", "")
 
             for (langWord in dictionary) {
-                if (langWord.verb == wordClean.lowercase()) {
-                    wordsFound.add(wordClean)
+                for (derivation in langWord.derivations) {
+                    if (wordClean.lowercase() == derivation.word) {
+                        wordsFound.add(derivation)
+                    }
                 }
 
-                if (wordClean.lowercase() in langWord.derivations) {
-                    wordsFound.add(wordClean)
+                if (langWord.word == wordClean.lowercase()) {
+                    wordsFound.add(langWord)
                 }
             }
         }

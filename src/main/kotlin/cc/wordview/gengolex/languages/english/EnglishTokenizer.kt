@@ -3,14 +3,14 @@ package cc.wordview.gengolex.languages.english
 import cc.wordview.gengolex.Language
 import cc.wordview.gengolex.NoDictionaryException
 import cc.wordview.gengolex.languages.GenericTokenizer
-import cc.wordview.gengolex.languages.Verb
+import cc.wordview.gengolex.languages.DerivatableWord
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.io.File
 import java.util.HashMap
 
 object EnglishTokenizer : GenericTokenizer() {
-    override var dictionary: List<Verb> = listOf()
+    override var dictionary: List<DerivatableWord> = listOf()
 
     override fun initializeDictionary(path: String) {
         val englishDictionaryJson = File("$path/${Language.ENGLISH.name.lowercase()}.json")
@@ -21,9 +21,9 @@ object EnglishTokenizer : GenericTokenizer() {
         if (englishDictionaryJson.isEmpty())
             throw NoDictionaryException("Unable to find a dictionary for english.")
 
-        val typeToken = object : TypeToken<List<Verb>>() {}.type
+        val typeToken = object : TypeToken<List<DerivatableWord>>() {}.type
 
-        val parsedDictionary = Gson().fromJson<List<Verb>>(englishDictionaryJson, typeToken)
+        val parsedDictionary = Gson().fromJson<List<DerivatableWord>>(englishDictionaryJson, typeToken)
 
         dictionary = parsedDictionary
     }
@@ -35,9 +35,9 @@ object EnglishTokenizer : GenericTokenizer() {
             throw NoDictionaryException("Unable to find a dictionary for english.")
 
 
-        val typeToken = object : TypeToken<List<Verb>>() {}.type
+        val typeToken = object : TypeToken<List<DerivatableWord>>() {}.type
 
-        val parsedDictionary = Gson().fromJson<List<Verb>>(dictionary, typeToken)
+        val parsedDictionary = Gson().fromJson<List<DerivatableWord>>(dictionary, typeToken)
 
         this.dictionary = parsedDictionary
     }
