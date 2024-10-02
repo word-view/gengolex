@@ -93,13 +93,14 @@ object JapaneseTokenizer : Tokenizer {
 
         var foundKanjiWord: Word? = null
 
-
         for (kanjiWord in kanjiDictionary) {
             if (kanjiWord.word == char) {
                 // if no derivations are found the word is the plain kanji itself
                 foundKanjiWord = kanjiWord
 
-                for (derivation in kanjiWord.derivations) {
+                // could be null if derivations is not set in the JSON, like {"parent":"walk","word":"歩く"}
+                @Suppress("SENSELESS_COMPARISON")
+                if (kanjiWord.derivations != null) for (derivation in kanjiWord.derivations) {
                     if (original.contains(derivation.word)) {
                         foundKanjiWord = derivation
                     }
