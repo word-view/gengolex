@@ -1,4 +1,5 @@
 # Gengolex
+[![](https://jitpack.io/v/word-view/gengolex.svg)](https://jitpack.io/#word-view/gengolex)
 
 A language parser and lexer created to be used in the WordView app.
 
