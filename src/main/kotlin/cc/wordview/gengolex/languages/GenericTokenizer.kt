@@ -16,7 +16,9 @@ abstract class GenericTokenizer : Tokenizer {
             val wordClean = word.replace(",", "").replace(".", "")
 
             for (langWord in dictionary) {
-                for (derivation in langWord.derivations) {
+                // could be null if derivations is not set in the JSON, like {"parent":"walk","word":"andar"}
+                @Suppress("SENSELESS_COMPARISON")
+                if (langWord.derivations != null) for (derivation in langWord.derivations) {
                     if (wordClean.lowercase() == derivation.word) {
                         wordsFound.add(derivation)
                     }
