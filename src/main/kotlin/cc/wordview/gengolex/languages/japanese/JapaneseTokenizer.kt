@@ -15,39 +15,29 @@ object JapaneseTokenizer : Tokenizer {
     var hiraganaDictionary: List<DerivatableWord> = listOf()
     var katakanaDictionary: List<DerivatableWord> = listOf()
 
+    val kanjiPattern = Pattern.compile("[一-龯]")
+
     override fun tokenize(words: List<String>): ArrayList<Word> {
-        val wordsByChars = words.joinToString()
-            .replace("、", "")
-            .replace("。", "")
-            .split("")
+        val wordsByChars = words.joinToString().replace("、", "").replace("。", "").split("")
+        val joinedWordsString = wordsByChars.joinToString("")
 
         val wordsFound = ArrayList<Word>()
-
         var charsToSkipNext = 0
 
-        for (char in wordsByChars) {
+        for (i in wordsByChars.indices) {
             if (charsToSkipNext > 0) {
                 charsToSkipNext--
                 continue
             }
 
-            var wordsString = wordsByChars.joinToString("")
+            val char = wordsByChars[i]
 
-            for (foundWord in wordsFound) {
-                wordsString = wordsString.replace(foundWord.word, "")
-            }
+            val currentWordsString =
+                wordsFound.fold(joinedWordsString) { acc, foundWord -> acc.replace(foundWord.word, "") }
 
-            val kanji = tokenizeKanji(
-                char,
-                wordsString
-                    .replaceFirst(char, "TO_REPLACE")
-                    .substringBefore(char)
-                    .replaceFirst("TO_REPLACE", char)
-            )
-
-            if (kanji != null) {
-                wordsFound.add(kanji)
-                charsToSkipNext = kanji.word.count() - 1
+            tokenizeKanji(char, currentWordsString)?.let {
+                wordsFound.add(it)
+                charsToSkipNext = it.word.length - 1
             }
         }
 
@@ -86,28 +76,13 @@ object JapaneseTokenizer : Tokenizer {
 
 
     private fun tokenizeKanji(char: String, original: String): Word? {
-        val pattern = Pattern.compile("[一-龯]")
-        val isKanji = pattern.matcher(char).matches()
+        if (!kanjiPattern.matcher(char).matches()) return null
 
-        if (!isKanji) return null
-
-        var foundKanjiWord: Word? = null
-
-        for (kanjiWord in kanjiDictionary) {
-            if (kanjiWord.word == char) {
-                // if no derivations are found the word is the plain kanji itself
-                foundKanjiWord = kanjiWord
-
-                // could be null if derivations is not set in the JSON, like {"parent":"walk","word":"歩く"}
-                @Suppress("SENSELESS_COMPARISON")
-                if (kanjiWord.derivations != null) for (derivation in kanjiWord.derivations) {
-                    if (original.contains(derivation.word)) {
-                        foundKanjiWord = derivation
-                    }
-                }
-            }
+        kanjiDictionary.firstOrNull { it.word == char }?.let { kanjiWord ->
+            @Suppress("UNNECESSARY_SAFE_CALL")
+            return kanjiWord.derivations?.firstOrNull { original.contains(it.word) } ?: kanjiWord
         }
 
-        return foundKanjiWord
+        return null
     }
 }

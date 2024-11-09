@@ -9,27 +9,19 @@ package cc.wordview.gengolex.languages
 abstract class GenericTokenizer : Tokenizer {
     abstract val dictionary: List<DerivatableWord>
 
+    @Suppress("USELESS_ELVIS")
+    private val wordMap: Map<String, Word> by lazy {
+        dictionary
+            .flatMap { listOf(it) + (it.derivations ?: emptyList()) }
+            .associateBy { it.word.lowercase() }
+    }
+
     override fun tokenize(words: List<String>): ArrayList<Word> {
         val wordsFound = ArrayList<Word>()
-
         for (word in words) {
-            val wordClean = word.replace(",", "").replace(".", "")
-
-            for (langWord in dictionary) {
-                // could be null if derivations is not set in the JSON, like {"parent":"walk","word":"andar"}
-                @Suppress("SENSELESS_COMPARISON")
-                if (langWord.derivations != null) for (derivation in langWord.derivations) {
-                    if (wordClean.lowercase() == derivation.word) {
-                        wordsFound.add(derivation)
-                    }
-                }
-
-                if (langWord.word == wordClean.lowercase()) {
-                    wordsFound.add(langWord)
-                }
-            }
+            val wordClean = word.replace("[,.]".toRegex(), "").lowercase()
+            wordMap[wordClean]?.let { wordsFound.add(it) }
         }
-
         return wordsFound
     }
 }
