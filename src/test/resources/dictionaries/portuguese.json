@@ -19,6 +19,7 @@
   },
   {
     "parent": "umbrella",
-    "word": "guarda-chuva"
+    "word": "guarda-chuva",
+    "representable": true
   }
 ]

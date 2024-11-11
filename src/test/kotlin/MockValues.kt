@@ -1,59 +1,6 @@
-const val englishDictionaryJsonString = "[\n" +
-        "  {\n" +
-        "    \"parent\": \"run\",\n" +
-        "    \"word\": \"run\",\n" +
-        "    \"derivations\": [\n" +
-        "      {\n" +
-        "        \"parent\": \"running\",\n" +
-        "        \"word\": \"running\"\n" +
-        "      },\n" +
-        "      {\n" +
-        "        \"parent\": \"ran\",\n" +
-        "        \"word\": \"ran\"\n" +
-        "      }\n" +
-        "    ]\n" +
-        "  }\n" +
-        "]\n" +
-        "\n"
-
-const val kanjiDictionaryJsonString = "[\n" +
-        "  {\n" +
-        "    \"parent\": \"run\",\n" +
-        "    \"word\": \"走\",\n" +
-        "    \"derivations\": [\n" +
-        "      {\n" +
-        "        \"parent\": \"run\",\n" +
-        "        \"word\": \"走る\"\n" +
-        "      },\n" +
-        "      {\n" +
-        "        \"parent\": \"ran\",\n" +
-        "        \"word\": \"走ってた\"\n" +
-        "      },\n" +
-        "      {\n" +
-        "        \"parent\": \"run\",\n" +
-        "        \"word\": \"走っています\"\n" +
-        "      }\n" +
-        "    ]\n" +
-        "  }\n" +
-        "]"
-
-const val portugueseDictionaryJsonString = "[\n" +
-        "  {\n" +
-        "    \"parent\": \"run\",\n" +
-        "    \"word\": \"correr\",\n" +
-        "    \"derivations\": [\n" +
-        "      {\n" +
-        "        \"parent\": \"ran\",\n" +
-        "        \"word\": \"corri\"\n" +
-        "      },\n" +
-        "      {\n" +
-        "        \"parent\": \"running\",\n" +
-        "        \"word\": \"correndo\"\n" +
-        "      },\n" +
-        "      {\n" +
-        "        \"parent\": \"run\",\n" +
-        "        \"word\": \"corra\"\n" +
-        "      }\n" +
-        "    ]\n" +
-        "  }\n" +
-        "]"
+const val englishDictionaryJsonString =
+    "[{\"parent\":\"run\",\"word\":\"run\",\"derivations\":[{\"parent\":\"running\",\"word\":\"running\"},{\"parent\":\"ran\",\"word\":\"ran\"}]}]"
+const val kanjiDictionaryJsonString =
+    "[{\"parent\":\"run\",\"word\":\"走\",\"derivations\":[{\"parent\":\"run\",\"word\":\"走る\"},{\"parent\":\"ran\",\"word\":\"走ってた\"},{\"parent\":\"running\",\"word\":\"走っています\"}]},{\"parent\":\"rain\",\"word\":\"雨\",\"representable\":true}]"
+const val portugueseDictionaryJsonString =
+    "[{\"parent\":\"run\",\"word\":\"correr\",\"derivations\":[{\"parent\":\"ran\",\"word\":\"corri\"},{\"parent\":\"running\",\"word\":\"correndo\"},{\"parent\":\"run\",\"word\":\"corra\"}]},{\"parent\":\"umbrella\",\"word\":\"guarda-chuva\",\"representable\":true}]"

@@ -19,6 +19,7 @@
   },
   {
     "parent": "rain",
-    "word": "雨"
+    "word": "雨",
+    "representable": true
   }
 ]
