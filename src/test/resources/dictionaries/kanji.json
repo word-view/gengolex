@@ -21,5 +21,11 @@
     "parent": "rain",
     "word": "雨",
     "representable": true
+  },
+  {
+    "parent": "i",
+    "word": "私",
+    "representable": false,
+    "derivations": []
   }
 ]

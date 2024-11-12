@@ -43,6 +43,9 @@ class ParserTest {
         words = parser.findWords("僕は走っています走ってた走る")
         assertEquals(3, words.size)
 
+        words = parser.findWords("私は走っています走ってた走る")
+        assertEquals(4, words.size)
+
         words = parser.findWords("走る、走ってた、僕は走っています。")
         assertEquals(3, words.size)
 
@@ -136,6 +139,9 @@ class ParserTest {
 
         words = parser.findWords("僕は走っています走ってた走る")
         assertEquals(3, words.size)
+
+        words = parser.findWords("私は走っています走ってた走る")
+        assertEquals(4, words.size)
 
         words = parser.findWords("走る、走ってた、僕は走っています。")
         assertEquals(3, words.size)
