@@ -29,13 +29,13 @@ class ParserTest {
         val parser = Parser(Language.JAPANESE, "${testResourcesPath}/dictionaries/")
 
         var words = parser.findWords("僕は走っています")
-        assertEquals("走っています", words.single().word)
+        assertEquals("走", words.single().word)
 
         words = parser.findWords("走ってた")
-        assertEquals("走ってた", words.single().word)
+        assertEquals("走", words.single().word)
 
         words = parser.findWords("走る")
-        assertEquals("走る", words.single().word)
+        assertEquals("走", words.single().word)
 
         words = parser.findWords("僕は走っています、走ってた、走る。")
         assertEquals(3, words.size)
@@ -126,13 +126,13 @@ class ParserTest {
         parser.addDictionary("kanji", kanjiDictionaryJsonString)
 
         var words = parser.findWords("僕は走っています")
-        assertEquals("走っています", words.single().word)
+        assertEquals("走", words.single().word)
 
         words = parser.findWords("走ってた")
-        assertEquals("走ってた", words.single().word)
+        assertEquals("走", words.single().word)
 
         words = parser.findWords("走る")
-        assertEquals("走る", words.single().word)
+        assertEquals("走", words.single().word)
 
         words = parser.findWords("僕は走っています、走ってた、走る。")
         assertEquals(3, words.size)
@@ -166,5 +166,28 @@ class ParserTest {
 
         words = parser.findWords("Correr, correndo, corri, corra")
         assertEquals(4, words.size)
+    }
+
+    // Separate test for specific words
+    @Test
+    fun parseSpecificJapaneseWords() {
+        // 世界
+        parseJapanese("こんな小さな世界で今日も", "世", "[{\"parent\":\"\",\"word\":\"世\",\"derivations\":[{\"parent\":\"world\",\"word\":\"世界\",\"representable\":true}]}]")
+        parseJapanese("音で世界があふれた", "世","[{\"parent\":\"\",\"word\":\"世\",\"derivations\":[{\"parent\":\"world\",\"word\":\"世界\",\"representable\":true}]}]")
+        parseJapanese("世界がなくなっても", "世","[{\"parent\":\"\",\"word\":\"世\",\"derivations\":[{\"parent\":\"world\",\"word\":\"世界\",\"representable\":true}]}]")
+        parseJapanese("この世界でひとときの", "世","[{\"parent\":\"\",\"word\":\"世\",\"derivations\":[{\"parent\":\"world\",\"word\":\"世界\",\"representable\":true}]}]")
+
+        // 太陽
+        parseJapanese("太陽たいようは嫌きらい、何なにも知しらずに", "太", "[{\"parent\":\"\",\"word\":\"太\",\"derivations\":[{\"parent\":\"sun\",\"word\":\"太陽\",\"representable\":true}]}]")
+    }
+
+    private fun parseJapanese(text: String, expectedParent: String, dictionary: String) {
+        val parser = Parser(Language.JAPANESE)
+        parser.addDictionary("kanji", dictionary)
+
+        val words = parser.findWords(text)
+
+        assertEquals(1, words.size)
+        assertEquals(expectedParent, words.single().word)
     }
 }
