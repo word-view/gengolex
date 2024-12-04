@@ -15,6 +15,9 @@ object JapaneseTokenizer : Tokenizer {
     var hiraganaDictionary: List<DerivatableWord> = listOf()
     var katakanaDictionary: List<DerivatableWord> = listOf()
 
+    @Suppress("MemberVisibilityCanBePrivate")
+    var kanjiStrategy = JapaneseKanjiStrategy.PREFER_DERIVATION
+
     private val kanjiPattern: Pattern = Pattern.compile("[一-龯]")
 
     override fun tokenize(words: List<String>): ArrayList<Word> {
@@ -75,12 +78,19 @@ object JapaneseTokenizer : Tokenizer {
     }
 
 
-    private fun tokenizeKanji(char: String, @Suppress("UNUSED_PARAMETER") original: String): Word? {
+    private fun tokenizeKanji(char: String, original: String): Word? {
         if (!kanjiPattern.matcher(char).matches()) return null
 
-        // as parents doest have a big number of derivations this should not cause many issues for now.
-        // TODO: Properly address this by removing all derivations that is not present in the phrase.
-        kanjiDictionary.firstOrNull { it.word == char }?.let { return it }
+        kanjiDictionary.firstOrNull { it.word == char }?.let { kanjiWord ->
+            return when (kanjiStrategy) {
+                // TODO: Properly address this by removing all derivations that is not present in the phrase.
+                JapaneseKanjiStrategy.PREFER_PARENT -> kanjiWord
+                JapaneseKanjiStrategy.PREFER_DERIVATION -> {
+                    @Suppress("UNNECESSARY_SAFE_CALL")
+                    kanjiWord.derivations?.firstOrNull { original.contains(it.word) } ?: kanjiWord
+                }
+            }
+        }
 
         return null
     }

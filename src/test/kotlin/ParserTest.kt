@@ -1,6 +1,8 @@
 import cc.wordview.gengolex.Language
 import cc.wordview.gengolex.NoDictionaryException
 import cc.wordview.gengolex.Parser
+import cc.wordview.gengolex.languages.japanese.JapaneseKanjiStrategy
+import cc.wordview.gengolex.languages.japanese.JapaneseTokenizer
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
@@ -168,20 +170,21 @@ class ParserTest {
         assertEquals(4, words.size)
     }
 
-    // Separate test for specific words
     @Test
-    fun parseSpecificJapaneseWords() {
+    fun japaneseTokenizerPrefersParent() {
+        JapaneseTokenizer.kanjiStrategy = JapaneseKanjiStrategy.PREFER_PARENT
+
         // 世界
-        parseJapanese("こんな小さな世界で今日も", "世", "[{\"parent\":\"\",\"word\":\"世\",\"derivations\":[{\"parent\":\"world\",\"word\":\"世界\",\"representable\":true}]}]")
-        parseJapanese("音で世界があふれた", "世","[{\"parent\":\"\",\"word\":\"世\",\"derivations\":[{\"parent\":\"world\",\"word\":\"世界\",\"representable\":true}]}]")
-        parseJapanese("世界がなくなっても", "世","[{\"parent\":\"\",\"word\":\"世\",\"derivations\":[{\"parent\":\"world\",\"word\":\"世界\",\"representable\":true}]}]")
-        parseJapanese("この世界でひとときの", "世","[{\"parent\":\"\",\"word\":\"世\",\"derivations\":[{\"parent\":\"world\",\"word\":\"世界\",\"representable\":true}]}]")
+        testJapanesePreferParent("こんな小さな世界で今日も", "世", "[{\"parent\":\"\",\"word\":\"世\",\"derivations\":[{\"parent\":\"world\",\"word\":\"世界\",\"representable\":true}]}]")
+        testJapanesePreferParent("音で世界があふれた", "世","[{\"parent\":\"\",\"word\":\"世\",\"derivations\":[{\"parent\":\"world\",\"word\":\"世界\",\"representable\":true}]}]")
+        testJapanesePreferParent("世界がなくなっても", "世","[{\"parent\":\"\",\"word\":\"世\",\"derivations\":[{\"parent\":\"world\",\"word\":\"世界\",\"representable\":true}]}]")
+        testJapanesePreferParent("この世界でひとときの", "世","[{\"parent\":\"\",\"word\":\"世\",\"derivations\":[{\"parent\":\"world\",\"word\":\"世界\",\"representable\":true}]}]")
 
         // 太陽
-        parseJapanese("太陽たいようは嫌きらい、何なにも知しらずに", "太", "[{\"parent\":\"\",\"word\":\"太\",\"derivations\":[{\"parent\":\"sun\",\"word\":\"太陽\",\"representable\":true}]}]")
+        testJapanesePreferParent("太陽たいようは嫌きらい、何なにも知しらずに", "太", "[{\"parent\":\"\",\"word\":\"太\",\"derivations\":[{\"parent\":\"sun\",\"word\":\"太陽\",\"representable\":true}]}]")
     }
 
-    private fun parseJapanese(text: String, expectedParent: String, dictionary: String) {
+    private fun testJapanesePreferParent(text: String, expectedParent: String, dictionary: String) {
         val parser = Parser(Language.JAPANESE)
         parser.addDictionary("kanji", dictionary)
 
