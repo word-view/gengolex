@@ -2,22 +2,18 @@
   {
     "parent": "run",
     "word": "correr",
-    "representable": false,
     "derivations": [
       {
         "parent": "ran",
-        "word": "corri",
-        "representable": false
+        "word": "corri"
       },
       {
         "parent": "running",
-        "word": "correndo",
-        "representable": false
+        "word": "correndo"
       },
       {
         "parent": "run",
-        "word": "corra",
-        "representable": false
+        "word": "corra"
       }
     ]
   },

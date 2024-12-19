@@ -1,6 +1,6 @@
 const val englishDictionaryJsonString =
-    "[{\"parent\":\"run\",\"word\":\"run\",\"representable\":false,\"derivations\":[{\"parent\":\"running\",\"word\":\"running\",\"representable\":false},{\"parent\":\"ran\",\"word\":\"ran\",\"representable\":false}]}]"
+    "[{\"parent\":\"run\",\"word\":\"run\",\"derivations\":[{\"parent\":\"running\",\"word\":\"running\"},{\"parent\":\"ran\",\"word\":\"ran\"}]}]"
 const val kanjiDictionaryJsonString =
-    "[{\"parent\":\"run\",\"word\":\"走\",\"representable\":false,\"derivations\":[{\"parent\":\"run\",\"word\":\"走る\",\"representable\":false},{\"parent\":\"ran\",\"word\":\"走ってた\",\"representable\":false},{\"parent\":\"running\",\"word\":\"走っています\",\"representable\":false}]},{\"parent\":\"rain\",\"word\":\"雨\",\"pronunciation\":\"ame\"},{\"parent\":\"i\",\"word\":\"私\",\"representable\":false}]"
+    "[{\"parent\":\"run\",\"word\":\"走\",\"derivations\":[{\"parent\":\"run\",\"word\":\"走る\"},{\"parent\":\"ran\",\"word\":\"走ってた\"},{\"parent\":\"running\",\"word\":\"走っています\"}]},{\"parent\":\"rain\",\"word\":\"雨\",\"representable\":true,\"pronunciation\":\"ame\"},{\"parent\":\"i\",\"word\":\"私\",\"representable\":false,\"derivations\":[]}]"
 const val portugueseDictionaryJsonString =
-    "[{\"parent\":\"run\",\"word\":\"correr\",\"representable\":false,\"derivations\":[{\"parent\":\"ran\",\"word\":\"corri\",\"representable\":false},{\"parent\":\"running\",\"word\":\"correndo\",\"representable\":false},{\"parent\":\"run\",\"word\":\"corra\",\"representable\":false}]},{\"parent\":\"umbrella\",\"word\":\"guarda-chuva\",\"representable\":true}]"
+    "[{\"parent\":\"run\",\"word\":\"correr\",\"derivations\":[{\"parent\":\"ran\",\"word\":\"corri\"},{\"parent\":\"running\",\"word\":\"correndo\"},{\"parent\":\"run\",\"word\":\"corra\"}]},{\"parent\":\"umbrella\",\"word\":\"guarda-chuva\",\"representable\":true}]"

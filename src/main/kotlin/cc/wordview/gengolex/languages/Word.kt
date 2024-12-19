@@ -11,4 +11,5 @@ open class Word(
     val parent: String,
     val word: String,
     val representable: Boolean = false,
+    val pronunciation: String? = null,
 )
