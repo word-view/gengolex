@@ -2,18 +2,22 @@
   {
     "parent": "run",
     "word": "走",
+    "representation": "DESCRIPTION",
     "derivations": [
       {
         "parent": "run",
-        "word": "走る"
+        "word": "走る",
+        "representation": "DESCRIPTION"
       },
       {
         "parent": "ran",
-        "word": "走ってた"
+        "word": "走ってた",
+        "representation": "DESCRIPTION"
       },
       {
         "parent": "running",
-        "word": "走っています"
+        "word": "走っています",
+        "representation": "DESCRIPTION"
       }
     ]
   },
@@ -21,12 +25,13 @@
     "parent": "rain",
     "word": "雨",
     "representable": true,
+    "representation": "ILLUSTRATION",
     "pronunciation": "ame"
   },
   {
     "parent": "i",
     "word": "私",
-    "representable": false,
-    "derivations": []
+    "representation": "DESCRIPTION",
+    "description": "Me, i"
   }
 ]

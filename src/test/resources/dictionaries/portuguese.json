@@ -2,24 +2,29 @@
   {
     "parent": "run",
     "word": "correr",
+    "representation": "DESCRIPTION",
     "derivations": [
       {
         "parent": "ran",
-        "word": "corri"
+        "word": "corri",
+        "representation": "DESCRIPTION"
       },
       {
         "parent": "running",
-        "word": "correndo"
+        "word": "correndo",
+        "representation": "DESCRIPTION"
       },
       {
         "parent": "run",
-        "word": "corra"
+        "word": "corra",
+        "representation": "DESCRIPTION"
       }
     ]
   },
   {
     "parent": "umbrella",
     "word": "guarda-chuva",
-    "representable": true
+    "representable": true,
+    "representation": "ILLUSTRATION"
   }
 ]
