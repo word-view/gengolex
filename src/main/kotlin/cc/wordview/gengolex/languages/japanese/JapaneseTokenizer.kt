@@ -1,19 +1,13 @@
 package cc.wordview.gengolex.languages.japanese
 
-import cc.wordview.gengolex.NoDictionaryException
 import cc.wordview.gengolex.languages.Tokenizer
 import cc.wordview.gengolex.languages.DerivatableWord
 import cc.wordview.gengolex.languages.Word
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
-import java.io.File
 import java.util.HashMap
 import java.util.regex.Pattern
 
 object JapaneseTokenizer : Tokenizer {
-    var kanjiDictionary: List<DerivatableWord> = listOf()
-    var hiraganaDictionary: List<DerivatableWord> = listOf()
-    var katakanaDictionary: List<DerivatableWord> = listOf()
+    override var dictionary: ArrayList<DerivatableWord> = arrayListOf()
 
     @Suppress("MemberVisibilityCanBePrivate")
     var kanjiStrategy = JapaneseKanjiStrategy.PREFER_DERIVATION
@@ -47,41 +41,10 @@ object JapaneseTokenizer : Tokenizer {
         return wordsFound
     }
 
-    override fun initializeDictionary(path: String) {
-        // Only initialize kanji for now
-        val kanjiDictionaryJson = File("$path/kanji.json")
-            .inputStream()
-            .readBytes()
-            .toString(Charsets.UTF_8)
-
-        if (kanjiDictionaryJson.isEmpty())
-            throw NoDictionaryException("Unable to find a dictionary for kanji")
-
-        val typeToken = object : TypeToken<List<DerivatableWord>>() {}.type
-
-        val parsedDictionary = Gson().fromJson<List<DerivatableWord>>(kanjiDictionaryJson, typeToken)
-
-        kanjiDictionary = parsedDictionary
-    }
-
-    override fun initializeDictionary(dictionaries: HashMap<String, String>) {
-        val kanjiDictionary = dictionaries["kanji"]
-
-        if (kanjiDictionary.isNullOrEmpty())
-            throw NoDictionaryException("Unable to find a dictionary for kanji")
-
-        val typeToken = object : TypeToken<List<DerivatableWord>>() {}.type
-
-        val parsedDictionary = Gson().fromJson<List<DerivatableWord>>(kanjiDictionary, typeToken)
-
-        this.kanjiDictionary = parsedDictionary
-    }
-
-
     private fun tokenizeKanji(char: String, original: String): Word? {
         if (!kanjiPattern.matcher(char).matches()) return null
 
-        kanjiDictionary.firstOrNull { it.word == char }?.let { kanjiWord ->
+        dictionary.firstOrNull { it.word == char }?.let { kanjiWord ->
             return when (kanjiStrategy) {
                 // TODO: Properly address this by removing all derivations that is not present in the phrase.
                 JapaneseKanjiStrategy.PREFER_PARENT -> kanjiWord
@@ -93,5 +56,13 @@ object JapaneseTokenizer : Tokenizer {
         }
 
         return null
+    }
+
+    override fun initializeDictionary(path: String) {
+        super.initializeDictionary(path, "kanji")
+    }
+
+    override fun initializeDictionary(dictionaries: HashMap<String, String>) {
+        super.initializeDictionary(dictionaries, "kanji")
     }
 }

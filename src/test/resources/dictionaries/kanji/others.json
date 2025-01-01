@@ -1,0 +1,15 @@
+[
+  {
+    "parent": "rain",
+    "word": "雨",
+    "representable": true,
+    "representation": "ILLUSTRATION",
+    "pronunciation": "ame"
+  },
+  {
+    "parent": "i",
+    "word": "私",
+    "representation": "DESCRIPTION",
+    "description": "Me, i"
+  }
+]

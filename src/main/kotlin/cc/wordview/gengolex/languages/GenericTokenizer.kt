@@ -1,5 +1,11 @@
 package cc.wordview.gengolex.languages
 
+import cc.wordview.gengolex.NoDictionaryException
+import cc.wordview.gengolex.languages.portuguese.PortugueseTokenizer
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import java.io.File
+
 /**
  * Represents a strategy for languages that separate
  * words by whitespaces and have only one writing system (e.g. portuguese, english, spanish).
@@ -7,7 +13,7 @@ package cc.wordview.gengolex.languages
  * is needed to support this kind of language is to define its dictionary.
  */
 abstract class GenericTokenizer : Tokenizer {
-    abstract val dictionary: List<DerivatableWord>
+    abstract override val dictionary: ArrayList<DerivatableWord>
 
     @Suppress("USELESS_ELVIS")
     private val wordMap: Map<String, Word> by lazy {
