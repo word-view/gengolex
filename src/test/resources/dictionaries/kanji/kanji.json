@@ -2,22 +2,22 @@
   {
     "parent": "run",
     "word": "走",
-    "representation": "DESCRIPTION",
+    "representation": "BOTH",
     "derivations": [
       {
         "parent": "run",
         "word": "走る",
-        "representation": "DESCRIPTION"
+        "representation": "BOTH"
       },
       {
         "parent": "ran",
         "word": "走ってた",
-        "representation": "DESCRIPTION"
+        "representation": "BOTH"
       },
       {
         "parent": "running",
         "word": "走っています",
-        "representation": "DESCRIPTION"
+        "representation": "BOTH"
       }
     ]
   }

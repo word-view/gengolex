@@ -45,19 +45,19 @@ class ParserWordFieldsTest {
 
         JapaneseTokenizer.kanjiStrategy = JapaneseKanjiStrategy.PREFER_DERIVATION
 
-        testFindWords(parser, "走", "run", "走", false, Representation.DESCRIPTION, null, null, 3)
+        testFindWords(parser, "走", "run", "走", false, Representation.BOTH, null, null, 3)
         testFindWords(
             parser,
             "僕は走っています",
             "running",
             "走っています",
             false,
-            Representation.DESCRIPTION,
+            Representation.BOTH,
             null,
             null
         )
-        testFindWords(parser, "僕は走ってた", "ran", "走ってた", false, Representation.DESCRIPTION, null, null)
-        testFindWords(parser, "僕は走る", "run", "走る", false, Representation.DESCRIPTION, null, null)
+        testFindWords(parser, "僕は走ってた", "ran", "走ってた", false, Representation.BOTH, null, null)
+        testFindWords(parser, "僕は走る", "run", "走る", false, Representation.BOTH, null, null)
         testFindWords(parser, "私は", "i", "私", false, Representation.DESCRIPTION, "Me, i", null)
         testFindWords(parser, "雨が降る", "rain", "雨", true, Representation.ILLUSTRATION, null, "ame")
     }

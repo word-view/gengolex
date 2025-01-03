@@ -6,6 +6,8 @@ package cc.wordview.gengolex.languages
  * Representation.ILLUSTRATION.name
  * // or
  * Representation.DESCRIPTION.name
+ * // or
+ * Representation.BOTH.name
  * ```
  * Because enum values are not parsed by Gson it's going to use the actual name as a string instead.
  */
@@ -18,5 +20,10 @@ enum class Representation {
     /**
      * Illustrate the Word's meaning using a description of it.
      */
-    DESCRIPTION
+    DESCRIPTION,
+
+    /**
+     * Illustrate the Word's meaning using an illustration and a description.
+     */
+    BOTH,
 }
