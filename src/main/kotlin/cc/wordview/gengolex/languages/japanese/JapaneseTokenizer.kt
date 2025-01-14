@@ -1,8 +1,8 @@
 package cc.wordview.gengolex.languages.japanese
 
 import cc.wordview.gengolex.languages.Tokenizer
-import cc.wordview.gengolex.languages.DerivatableWord
-import cc.wordview.gengolex.languages.Word
+import cc.wordview.gengolex.word.DerivatableWord
+import cc.wordview.gengolex.word.Word
 import java.util.HashMap
 import java.util.regex.Pattern
 

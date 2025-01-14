@@ -1,7 +1,7 @@
 package cc.wordview.gengolex.languages.english
 
 import cc.wordview.gengolex.languages.GenericTokenizer
-import cc.wordview.gengolex.languages.DerivatableWord
+import cc.wordview.gengolex.word.DerivatableWord
 import java.util.HashMap
 
 object EnglishTokenizer : GenericTokenizer() {

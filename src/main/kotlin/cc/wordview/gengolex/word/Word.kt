@@ -1,4 +1,4 @@
-package cc.wordview.gengolex.languages
+package cc.wordview.gengolex.word
 
 /**
  * Represents a word in any given language.
@@ -13,6 +13,7 @@ package cc.wordview.gengolex.languages
 open class Word(
     val parent: String,
     val word: String,
+    val type: String = Type.NOUN.name,
     val representable: Boolean = false,
     val representation: String = Representation.DESCRIPTION.name,
     val description: String? = null,

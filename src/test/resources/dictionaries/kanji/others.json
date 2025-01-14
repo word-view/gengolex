@@ -2,6 +2,7 @@
   {
     "parent": "rain",
     "word": "雨",
+    "type": "NOUN",
     "representable": true,
     "representation": "ILLUSTRATION",
     "pronunciation": "ame"
@@ -9,6 +10,7 @@
   {
     "parent": "i",
     "word": "私",
+    "type": "NOUN",
     "representation": "DESCRIPTION",
     "description": "Me, i"
   }

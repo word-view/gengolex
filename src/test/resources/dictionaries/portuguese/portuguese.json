@@ -2,21 +2,25 @@
   {
     "parent": "run",
     "word": "correr",
+    "type": "VERB",
     "representation": "DESCRIPTION",
     "derivations": [
       {
         "parent": "ran",
         "word": "corri",
+        "type": "VERB",
         "representation": "DESCRIPTION"
       },
       {
         "parent": "running",
         "word": "correndo",
+        "type": "VERB",
         "representation": "DESCRIPTION"
       },
       {
         "parent": "run",
         "word": "corra",
+        "type": "VERB",
         "representation": "DESCRIPTION"
       }
     ]

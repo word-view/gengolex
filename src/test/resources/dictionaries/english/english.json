@@ -2,16 +2,19 @@
   {
     "parent": "run",
     "word": "run",
+    "type": "VERB",
     "representation": "DESCRIPTION",
     "derivations": [
       {
         "parent": "running",
         "word": "running",
+        "type": "VERB",
         "representation": "DESCRIPTION"
       },
       {
         "parent": "ran",
         "word": "ran",
+        "type": "VERB",
         "representation": "DESCRIPTION"
       }
     ]

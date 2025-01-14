@@ -1,10 +1,7 @@
 package cc.wordview.gengolex.languages
 
-import cc.wordview.gengolex.NoDictionaryException
-import cc.wordview.gengolex.languages.portuguese.PortugueseTokenizer
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
-import java.io.File
+import cc.wordview.gengolex.word.DerivatableWord
+import cc.wordview.gengolex.word.Word
 
 /**
  * Represents a strategy for languages that separate

@@ -1,6 +1,6 @@
 package cc.wordview.gengolex
 
-import cc.wordview.gengolex.languages.Word
+import cc.wordview.gengolex.word.Word
 import java.util.ArrayList
 import java.util.HashMap
 

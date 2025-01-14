@@ -1,4 +1,4 @@
-package cc.wordview.gengolex.languages
+package cc.wordview.gengolex.word
 
 /**
  * Represents any word that can have derivations in any language

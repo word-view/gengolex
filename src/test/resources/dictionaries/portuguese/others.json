@@ -2,6 +2,7 @@
   {
     "parent": "umbrella",
     "word": "guarda-chuva",
+    "type": "NOUN",
     "representable": true,
     "representation": "ILLUSTRATION"
   }

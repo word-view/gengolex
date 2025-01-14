@@ -2,21 +2,25 @@
   {
     "parent": "run",
     "word": "走",
+    "type": "VERB",
     "representation": "BOTH",
     "derivations": [
       {
         "parent": "run",
         "word": "走る",
+        "type": "VERB",
         "representation": "BOTH"
       },
       {
         "parent": "ran",
         "word": "走ってた",
+        "type": "VERB",
         "representation": "BOTH"
       },
       {
         "parent": "running",
         "word": "走っています",
+        "type": "VERB",
         "representation": "BOTH"
       }
     ]

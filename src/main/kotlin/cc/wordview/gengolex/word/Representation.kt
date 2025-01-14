@@ -1,4 +1,4 @@
-package cc.wordview.gengolex.languages
+package cc.wordview.gengolex.word
 
 /**
  * Indicates how a Word should represent it's meaning. Should be used as:
