@@ -3,18 +3,21 @@
     "parent": "run",
     "word": "run",
     "type": "VERB",
+    "time": "PRESENT",
     "representation": "DESCRIPTION",
     "derivations": [
       {
         "parent": "running",
         "word": "running",
         "type": "VERB",
+        "time": "PRESENT",
         "representation": "DESCRIPTION"
       },
       {
         "parent": "ran",
         "word": "ran",
         "type": "VERB",
+        "time": "PAST",
         "representation": "DESCRIPTION"
       }
     ]

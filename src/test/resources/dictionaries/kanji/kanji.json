@@ -3,24 +3,28 @@
     "parent": "run",
     "word": "走",
     "type": "VERB",
+    "time": "PRESENT",
     "representation": "BOTH",
     "derivations": [
       {
         "parent": "run",
         "word": "走る",
         "type": "VERB",
+        "time": "PRESENT",
         "representation": "BOTH"
       },
       {
         "parent": "ran",
         "word": "走ってた",
         "type": "VERB",
+        "time": "PAST",
         "representation": "BOTH"
       },
       {
         "parent": "running",
         "word": "走っています",
         "type": "VERB",
+        "time": "PRESENT",
         "representation": "BOTH"
       }
     ]

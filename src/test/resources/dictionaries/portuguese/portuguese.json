@@ -3,24 +3,28 @@
     "parent": "run",
     "word": "correr",
     "type": "VERB",
+    "time": "PRESENT",
     "representation": "DESCRIPTION",
     "derivations": [
       {
         "parent": "ran",
         "word": "corri",
         "type": "VERB",
+        "time": "PAST",
         "representation": "DESCRIPTION"
       },
       {
         "parent": "running",
         "word": "correndo",
         "type": "VERB",
+        "time": "PRESENT",
         "representation": "DESCRIPTION"
       },
       {
         "parent": "run",
         "word": "corra",
         "type": "VERB",
+        "time": "PRESENT",
         "representation": "DESCRIPTION"
       }
     ]
