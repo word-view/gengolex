@@ -6,12 +6,10 @@ import cc.wordview.gengolex.languages.japanese.JapaneseTokenizer
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
-class ParserTest {
-    private val testResourcesPath = object {}.javaClass.classLoader.getResource("")?.toString()?.replace("file:", "")
-
+class ParserTest : GengolexTest() {
     @Test
     fun findEnglishWords() {
-        val parser = Parser(Language.ENGLISH, "${testResourcesPath}/dictionaries/")
+        val parser = Parser(Language.ENGLISH, dictionaries)
 
         var words = parser.findWords("Run")
         assertEquals("run", words.single().word)
@@ -28,7 +26,7 @@ class ParserTest {
 
     @Test
     fun findJapaneseWords() {
-        val parser = Parser(Language.JAPANESE, "${testResourcesPath}/dictionaries/")
+        val parser = Parser(Language.JAPANESE, dictionaries)
 
         var words = parser.findWords("僕は走っています")
         assertEquals("走", words.single().word)
@@ -58,7 +56,7 @@ class ParserTest {
     @Test
     fun findPortugueseWords() {
         val parser = Parser(
-            Language.PORTUGUESE, "${testResourcesPath}/dictionaries/"
+            Language.PORTUGUESE, dictionaries
         )
 
         var words = parser.findWords("Correr")
