@@ -1,16 +1,16 @@
 package parser
 
+import GengolexTest
 import cc.wordview.gengolex.Language
 import cc.wordview.gengolex.Parser
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
-class SyntaxFieldTest {
-    private val testResourcesPath = object {}.javaClass.classLoader.getResource("")?.toString()?.replace("file:", "")
-
+class SyntaxFieldTest : GengolexTest() {
+    // Japanese
     @Test
     fun japaneseNegative() {
-        val parser = Parser(Language.JAPANESE, "$testResourcesPath/dictionaries/")
+        val parser = Parser(Language.JAPANESE, dictionaries)
 
         val res = parser.findWords("変わらない").single()
 
@@ -23,7 +23,7 @@ class SyntaxFieldTest {
 
     @Test
     fun japaneseConditional() {
-        val parser = Parser(Language.JAPANESE, "$testResourcesPath/dictionaries/")
+        val parser = Parser(Language.JAPANESE, dictionaries)
 
         val res = parser.findWords("近付いたら").single()
 
