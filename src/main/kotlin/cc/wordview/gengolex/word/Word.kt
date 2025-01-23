@@ -15,6 +15,7 @@ package cc.wordview.gengolex.word
 open class Word(
     val parent: String,
     val word: String,
+    val syntax: Syntax? = null,
     val type: String = Type.NOUN.name,
     val time: String? = null,
     val representable: Boolean = false,

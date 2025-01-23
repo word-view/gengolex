@@ -13,5 +13,49 @@
     "type": "NOUN",
     "representation": "DESCRIPTION",
     "description": "Me, i"
+  },
+  {
+    "parent": "weird",
+    "word": "変",
+    "representable": false,
+    "derivations": [
+      {
+        "parent": "wont_change",
+        "word": "変わらない",
+        "representable": true,
+        "syntax": {
+          "default": {
+            "start": 0,
+            "end": 2
+          },
+          "negative": {
+            "start": 3,
+            "end": 4
+          }
+        }
+      }
+    ]
+  },
+  {
+    "parent": "",
+    "word": "近",
+    "representable": false,
+    "derivations": [
+      {
+        "parent": "if_get_close",
+        "word": "近付いたら",
+        "representable": true,
+        "syntax": {
+          "default": {
+            "start": 0,
+            "end": 2
+          },
+          "conditional": {
+            "start": 3,
+            "end": 4
+          }
+        }
+      }
+    ]
   }
 ]
