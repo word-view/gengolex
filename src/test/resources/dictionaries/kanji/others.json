@@ -15,13 +15,15 @@
     "description": "Me, i"
   },
   {
-    "parent": "weird",
+    "parent": "",
     "word": "変",
     "representable": false,
     "derivations": [
       {
         "parent": "wont_change",
         "word": "変わらない",
+        "type": "VERB",
+        "time": "PRESENT",
         "representable": true,
         "syntax": {
           "default": {
@@ -44,6 +46,8 @@
       {
         "parent": "if_get_close",
         "word": "近付いたら",
+        "type": "VERB",
+        "time": "PRESENT",
         "representable": true,
         "syntax": {
           "default": {

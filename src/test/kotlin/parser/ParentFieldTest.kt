@@ -15,6 +15,8 @@ class ParentFieldTest : GengolexTest() {
         testParent("僕は走る", "run", Language.JAPANESE)
         testParent("私は", "i", Language.JAPANESE)
         testParent("雨が降る", "rain", Language.JAPANESE)
+        testParent("変わらないよ", "wont_change", Language.JAPANESE)
+        testParent("近付いたら壊れてしまいそう", "if_get_close", Language.JAPANESE)
     }
 
     @Test

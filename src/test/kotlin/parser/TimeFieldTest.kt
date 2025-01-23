@@ -16,6 +16,8 @@ class TimeFieldTest : GengolexTest() {
         testTime("僕は走る", Time.PRESENT, Language.JAPANESE)
         testTime("私は", null, Language.JAPANESE)
         testTime("雨が降る", null, Language.JAPANESE)
+        testTime("変わらないよ", Time.PRESENT, Language.JAPANESE)
+        testTime("近付いたら壊れてしまいそう", Time.PRESENT, Language.JAPANESE)
     }
 
     @Test

@@ -19,6 +19,8 @@ class WordFieldTest : GengolexTest() {
         testWord("僕は走る", "走る", Language.JAPANESE)
         testWord("私は", "私", Language.JAPANESE)
         testWord("雨が降る", "雨", Language.JAPANESE)
+        testWord("変わらないよ", "変わらない", Language.JAPANESE)
+        testWord("近付いたら壊れてしまいそう", "近付いたら", Language.JAPANESE)
     }
 
     @Test

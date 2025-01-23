@@ -16,6 +16,8 @@ class TypeFieldTest : GengolexTest() {
         testType("僕は走る", Type.VERB, Language.JAPANESE)
         testType("私は", Type.NOUN, Language.JAPANESE)
         testType("雨が降る", Type.NOUN, Language.JAPANESE)
+        testType("変わらないよ", Type.VERB, Language.JAPANESE)
+        testType("近付いたら壊れてしまいそう", Type.VERB, Language.JAPANESE)
     }
 
     @Test
