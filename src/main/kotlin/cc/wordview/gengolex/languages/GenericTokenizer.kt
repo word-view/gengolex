@@ -12,9 +12,10 @@ import cc.wordview.gengolex.word.Word
 abstract class GenericTokenizer : Tokenizer {
     abstract override val dictionary: ArrayList<DerivatableWord>
 
-    @Suppress("USELESS_ELVIS")
+    @Suppress("USELESS_ELVIS", "UselessCallOnCollection")
     private val wordMap: Map<String, Word> by lazy {
         dictionary
+            .filterNotNull()
             .flatMap { listOf(it) + (it.derivations ?: emptyList()) }
             .associateBy { it.word.lowercase() }
     }
