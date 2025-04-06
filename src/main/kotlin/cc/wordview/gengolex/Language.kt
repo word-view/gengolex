@@ -18,6 +18,7 @@ enum class Language(val tag: String, val dictionaryName: String, val tokenizer: 
     PORTUGUESE("pt", "portuguese", PortugueseTokenizer, Locale.forLanguageTag("pt"));
 
     companion object {
+        @Throws(LanguageNotFoundException::class)
         fun byTag(tag: String): Language {
             for (lang in Language.entries) {
                 if (lang.tag == tag) return lang
