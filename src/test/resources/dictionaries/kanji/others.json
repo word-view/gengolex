@@ -2,17 +2,12 @@
   {
     "parent": "rain",
     "word": "雨",
-    "type": "NOUN",
     "representable": true,
-    "representation": "ILLUSTRATION",
     "pronunciation": "ame"
   },
   {
     "parent": "i",
-    "word": "私",
-    "type": "NOUN",
-    "representation": "DESCRIPTION",
-    "description": "Me, i"
+    "word": "私"
   },
   {
     "parent": "",
@@ -21,20 +16,7 @@
     "derivations": [
       {
         "parent": "wont_change",
-        "word": "変わらない",
-        "type": "VERB",
-        "time": "PRESENT",
-        "representable": true,
-        "syntax": {
-          "default": {
-            "start": 0,
-            "end": 2
-          },
-          "negative": {
-            "start": 3,
-            "end": 4
-          }
-        }
+        "word": "変わらない"
       }
     ]
   },
@@ -46,19 +28,7 @@
       {
         "parent": "if_get_close",
         "word": "近付いたら",
-        "type": "VERB",
-        "time": "PRESENT",
-        "representable": true,
-        "syntax": {
-          "default": {
-            "start": 0,
-            "end": 2
-          },
-          "conditional": {
-            "start": 3,
-            "end": 4
-          }
-        }
+        "representable": true
       }
     ]
   }

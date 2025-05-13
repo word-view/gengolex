@@ -15,7 +15,7 @@ class RepresentableFieldTest : GengolexTest() {
         testRepresentability("僕は走る", false, Language.JAPANESE)
         testRepresentability("私は", false, Language.JAPANESE)
         testRepresentability("雨が降る", true, Language.JAPANESE)
-        testRepresentability("変わらないよ", true, Language.JAPANESE)
+        testRepresentability("変わらないよ", false, Language.JAPANESE)
         testRepresentability("近付いたら壊れてしまいそう", true, Language.JAPANESE)
     }
 
