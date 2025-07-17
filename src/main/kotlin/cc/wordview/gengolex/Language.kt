@@ -26,5 +26,14 @@ enum class Language(val tag: String, val dictionaryName: String, val tokenizer: 
 
             throw LanguageNotFoundException("Unable to find a language for the tag: $tag")
         }
+
+        @Throws(LanguageNotFoundException::class)
+        fun byLocale(locale: Locale): Language {
+            for (lang in Language.entries) {
+                if (lang.locale == locale) return lang
+            }
+
+            throw LanguageNotFoundException("Unable to find a language for the locale: ${locale.displayLanguage}")
+        }
     }
 }
