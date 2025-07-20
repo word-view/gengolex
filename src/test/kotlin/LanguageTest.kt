@@ -35,6 +35,33 @@ class LanguageTest {
     }
 
     @Test
+    fun getEnglish_byTag_DifferentCasing() {
+        assertDoesNotThrow {
+            val lang = Language.byTag("eN")
+            assertEquals(Language.ENGLISH, lang)
+            assertEquals("english", lang.dictionaryName)
+        }
+    }
+
+    @Test
+    fun getJapanese_byTag_DifferentCasing() {
+        assertDoesNotThrow {
+            val lang = Language.byTag("Ja")
+            assertEquals(Language.JAPANESE, lang)
+            assertEquals("kanji", lang.dictionaryName)
+        }
+    }
+
+    @Test
+    fun getPortuguese_byTag_DifferentCasing() {
+        assertDoesNotThrow {
+            val lang = Language.byTag("PT")
+            assertEquals(Language.PORTUGUESE, lang)
+            assertEquals("portuguese", lang.dictionaryName)
+        }
+    }
+
+    @Test
     fun getInexistent_byTag() {
         assertThrows<LanguageNotFoundException> {
             Language.byTag("kr")
