@@ -28,7 +28,7 @@ enum class Language(val tag: String, val dictionaryName: String, val tokenizer: 
         @Throws(LanguageNotFoundException::class)
         fun byTag(tag: String): Language {
             for (lang in Language.entries) {
-                if (lang.tag == tag) return lang
+                if (lang.tag == tag.lowercase()) return lang
             }
 
             throw LanguageNotFoundException("Unable to find a language for the tag: $tag")
