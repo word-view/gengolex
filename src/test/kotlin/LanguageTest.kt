@@ -74,4 +74,101 @@ class LanguageTest {
             Language.byLocale(Locale.GERMAN)
         }
     }
+
+    @Test
+    fun getEnglish_byLocaleLanguage() {
+        assertDoesNotThrow {
+            val lang = Language.byLocaleLanguage(Locale.ENGLISH)
+            assertEquals(Language.ENGLISH, lang)
+            assertEquals("english", lang.dictionaryName)
+        }
+    }
+
+    @Test
+    fun getJapanese_byLocaleLanguage() {
+        assertDoesNotThrow {
+            val lang = Language.byLocaleLanguage(Locale.JAPANESE)
+            assertEquals(Language.JAPANESE, lang)
+            assertEquals("kanji", lang.dictionaryName)
+        }
+    }
+
+    @Test
+    fun getPortuguese_byLocaleLanguage() {
+        assertDoesNotThrow {
+            val lang = Language.byLocaleLanguage(Locale.forLanguageTag("pt"))
+            assertEquals(Language.PORTUGUESE, lang)
+            assertEquals("portuguese", lang.dictionaryName)
+        }
+    }
+
+    @Test
+    fun getInexistent_byLocaleLanguage() {
+        assertThrows<LanguageNotFoundException> {
+            Language.byLocaleLanguage(Locale.forLanguageTag("fr-FR"))
+        }
+    }
+
+    @Test
+    fun getEnglish_byLocaleLanguage_GreatBritain() {
+        assertDoesNotThrow {
+            val lang = Language.byLocaleLanguage(Locale.forLanguageTag("en-GB"))
+            assertEquals(Language.ENGLISH, lang)
+            assertEquals("english", lang.dictionaryName)
+        }
+    }
+
+    @Test
+    fun getEnglish_byLocaleLanguage_UnitedStates() {
+        assertDoesNotThrow {
+            val lang = Language.byLocaleLanguage(Locale.forLanguageTag("en-US"))
+            assertEquals(Language.ENGLISH, lang)
+            assertEquals("english", lang.dictionaryName)
+        }
+    }
+
+    @Test
+    fun getEnglish_byLocaleLanguage_Australia() {
+        assertDoesNotThrow {
+            val lang = Language.byLocaleLanguage(Locale.forLanguageTag("en-AU"))
+            assertEquals(Language.ENGLISH, lang)
+            assertEquals("english", lang.dictionaryName)
+        }
+    }
+
+    @Test
+    fun getPortuguese_byLocaleLanguage_Portugal() {
+        assertDoesNotThrow {
+            val lang = Language.byLocaleLanguage(Locale.forLanguageTag("pt-PT"))
+            assertEquals(Language.PORTUGUESE, lang)
+            assertEquals("portuguese", lang.dictionaryName)
+        }
+    }
+
+    @Test
+    fun getPortuguese_byLocaleLanguage_Brazil() {
+        assertDoesNotThrow {
+            val lang = Language.byLocaleLanguage(Locale.forLanguageTag("pt-BR"))
+            assertEquals(Language.PORTUGUESE, lang)
+            assertEquals("portuguese", lang.dictionaryName)
+        }
+    }
+
+    @Test
+    fun getPortuguese_byLocaleLanguage_Angola() {
+        assertDoesNotThrow {
+            val lang = Language.byLocaleLanguage(Locale.forLanguageTag("pt-AO"))
+            assertEquals(Language.PORTUGUESE, lang)
+            assertEquals("portuguese", lang.dictionaryName)
+        }
+    }
+
+    @Test
+    fun getPortuguese_byLocaleLanguage_Mozambique() {
+        assertDoesNotThrow {
+            val lang = Language.byLocaleLanguage(Locale.forLanguageTag("pt-MZ"))
+            assertEquals(Language.PORTUGUESE, lang)
+            assertEquals("portuguese", lang.dictionaryName)
+        }
+    }
 }
