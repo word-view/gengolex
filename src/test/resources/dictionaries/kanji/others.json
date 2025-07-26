@@ -31,5 +31,18 @@
         "representable": true
       }
     ]
+  },
+  {
+    "parent": "sad",
+    "word": "悲",
+    "representable": true,
+    "derivations": [
+      {
+        "parent": "sad",
+        "translation_parent": "sadness",
+        "word": "悲しみ",
+        "representable": true
+      }
+    ]
   }
 ]
