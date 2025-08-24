@@ -21,7 +21,9 @@ object JapaneseTokenizer : Tokenizer {
         val wordsFound = ArrayList<Word>()
         var charsToSkipNext = 0
 
-        for (i in wordsByChars.indices) {
+        var i = 0
+
+        while (i < wordsByChars.size) {
             if (charsToSkipNext > 0) {
                 charsToSkipNext--
                 continue
@@ -36,6 +38,8 @@ object JapaneseTokenizer : Tokenizer {
                 wordsFound.add(it)
                 charsToSkipNext = it.word.length - 1
             }
+
+            i++
         }
 
         return wordsFound
