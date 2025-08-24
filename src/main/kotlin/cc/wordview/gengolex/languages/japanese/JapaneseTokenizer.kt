@@ -1,6 +1,7 @@
 package cc.wordview.gengolex.languages.japanese
 
 import cc.wordview.gengolex.languages.Tokenizer
+import cc.wordview.gengolex.languages.japanese.JapaneseKanjiStrategy.*
 import cc.wordview.gengolex.word.DerivatableWord
 import cc.wordview.gengolex.word.Word
 import java.util.HashMap
@@ -8,9 +9,10 @@ import java.util.regex.Pattern
 
 object JapaneseTokenizer : Tokenizer {
     override var dictionary: ArrayList<DerivatableWord> = arrayListOf()
+    private val wordMap: HashMap<String, DerivatableWord> = HashMap()
 
     @Suppress("MemberVisibilityCanBePrivate")
-    var kanjiStrategy = JapaneseKanjiStrategy.PREFER_DERIVATION
+    var kanjiStrategy = PREFER_DERIVATION
 
     private val kanjiPattern: Pattern = Pattern.compile("[一-龯]")
 
@@ -38,11 +40,10 @@ object JapaneseTokenizer : Tokenizer {
     private fun tokenizeKanji(char: String, original: String): Word? {
         if (!kanjiPattern.matcher(char).matches()) return null
 
-        dictionary.firstOrNull { it.word == char }?.let { kanjiWord ->
+        wordMap[char]?.let { kanjiWord ->
             return when (kanjiStrategy) {
-                // TODO: Properly address this by removing all derivations that is not present in the phrase.
-                JapaneseKanjiStrategy.PREFER_PARENT -> kanjiWord
-                JapaneseKanjiStrategy.PREFER_DERIVATION -> {
+                PREFER_PARENT -> kanjiWord
+                PREFER_DERIVATION -> {
                     @Suppress("UNNECESSARY_SAFE_CALL")
                     kanjiWord.derivations?.firstOrNull { original.contains(it.word) } ?: kanjiWord
                 }
@@ -54,9 +55,11 @@ object JapaneseTokenizer : Tokenizer {
 
     override fun initializeDictionary(path: String) {
         super.initializeDictionary(path, "kanji")
+        dictionary.forEach { wordMap[it.word] = it }
     }
 
     override fun initializeDictionary(dictionaries: HashMap<String, String>) {
         super.initializeDictionary(dictionaries, "kanji")
+        dictionary.forEach { wordMap[it.word] = it }
     }
 }
