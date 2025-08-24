@@ -15,31 +15,21 @@ object JapaneseTokenizer : Tokenizer {
     private val kanjiPattern: Pattern = Pattern.compile("[一-龯]")
 
     override fun tokenize(words: List<String>): ArrayList<Word> {
-        val wordsByChars = words.joinToString().replace("、", "").replace("。", "").split("")
-        val joinedWordsString = wordsByChars.joinToString("")
+        val input = words.joinToString()
+            .replace("、", "")
+            .replace("。", "")
+
+        val chars = input.toCharArray()
 
         val wordsFound = ArrayList<Word>()
-        var charsToSkipNext = 0
-
         var i = 0
 
-        while (i < wordsByChars.size) {
-            if (charsToSkipNext > 0) {
-                charsToSkipNext--
-                continue
-            }
-
-            val char = wordsByChars[i]
-
-            val currentWordsString =
-                wordsFound.fold(joinedWordsString) { acc, foundWord -> acc.replace(foundWord.word, "") }
-
-            tokenizeKanji(char, currentWordsString)?.let {
+        while (i < chars.size) {
+            val char = chars[i].toString()
+            tokenizeKanji(char, input.substring(i))?.let {
                 wordsFound.add(it)
-                charsToSkipNext = it.word.length - 1
-            }
-
-            i++
+                i += it.word.length // Skip characters based on the word's length
+            } ?: i++
         }
 
         return wordsFound
