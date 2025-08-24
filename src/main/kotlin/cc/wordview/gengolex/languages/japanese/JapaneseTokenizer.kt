@@ -14,8 +14,6 @@ object JapaneseTokenizer : Tokenizer {
     @Suppress("MemberVisibilityCanBePrivate")
     var kanjiStrategy = PREFER_DERIVATION
 
-    private val kanjiPattern: Pattern = Pattern.compile("[一-龯]")
-
     override fun tokenize(words: List<String>): ArrayList<Word> {
         val input = words.joinToString()
             .replace("、", "")
@@ -38,7 +36,7 @@ object JapaneseTokenizer : Tokenizer {
     }
 
     private fun tokenizeKanji(char: String, original: String): Word? {
-        if (!kanjiPattern.matcher(char).matches()) return null
+        if (char.isEmpty() || char[0].code !in 0x4E00..0x9FFF) return null
 
         wordMap[char]?.let { kanjiWord ->
             return when (kanjiStrategy) {
