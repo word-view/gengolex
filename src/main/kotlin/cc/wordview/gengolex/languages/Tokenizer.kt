@@ -5,8 +5,15 @@ import cc.wordview.gengolex.word.DerivatableWord
 import cc.wordview.gengolex.word.Word
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.IO
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.runBlocking
 import java.io.File
 import java.util.HashMap
+import kotlin.collections.emptyList
+import kotlin.collections.flatten
 
 interface Tokenizer {
     val dictionary: ArrayList<DerivatableWord>
@@ -18,21 +25,21 @@ interface Tokenizer {
     fun initializeDictionary(path: String, lang: String) {
         val dictionaryDir = File("$path/$lang")
 
-        val files = dictionaryDir.listFiles()?.filter { it.isFile && it.name.endsWith(".json") }
-
-        if (files.isNullOrEmpty())
+        val files = dictionaryDir.listFiles()?.filter { it.isFile && it.name.endsWith(".json") } ?:
             throw NoDictionaryException("Unable to find a dictionary for $lang")
 
-        for (file in files) {
-            val content = file.inputStream().readBytes().toString(Charsets.UTF_8)
-
-            if (content.isEmpty()) continue
-
+        runBlocking(Dispatchers.IO) {
             val typeToken = object : TypeToken<List<DerivatableWord>>() {}.type
+            val gson = Gson()
 
-            val parsedDictionary = Gson().fromJson<List<DerivatableWord>>(content, typeToken)
+            val parsedDictionaries = files.map { file ->
+                async {
+                    val content = file.inputStream().use { it.readBytes().toString(Charsets.UTF_8) }
+                    if (content.isEmpty()) emptyList() else gson.fromJson<List<DerivatableWord>>(content, typeToken)
+                }
+            }.awaitAll()
 
-            dictionary.addAll(parsedDictionary)
+            dictionary.addAll(parsedDictionaries.flatten())
         }
     }
 
