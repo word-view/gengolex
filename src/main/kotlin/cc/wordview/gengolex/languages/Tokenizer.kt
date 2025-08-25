@@ -39,14 +39,14 @@ interface Tokenizer {
     fun initializeDictionary(dictionaries: HashMap<String, String>)
 
     fun initializeDictionary(dictionaries: HashMap<String, String>, lang: String) {
-        val portugueseDictionary = dictionaries[lang]
+        val hashmapDictionary = dictionaries[lang]
 
-        if (portugueseDictionary.isNullOrEmpty())
+        if (hashmapDictionary.isNullOrEmpty())
             throw NoDictionaryException("Unable to find a dictionary for $lang")
 
         val typeToken = object : TypeToken<List<DerivatableWord>>() {}.type
 
-        val parsedDictionary = Gson().fromJson<List<DerivatableWord>>(portugueseDictionary, typeToken)
+        val parsedDictionary = Gson().fromJson<List<DerivatableWord>>(hashmapDictionary, typeToken)
 
         dictionary.addAll(parsedDictionary)
     }
