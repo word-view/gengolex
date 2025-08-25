@@ -5,7 +5,6 @@ import cc.wordview.gengolex.languages.japanese.JapaneseKanjiStrategy.*
 import cc.wordview.gengolex.word.DerivatableWord
 import cc.wordview.gengolex.word.Word
 import java.util.HashMap
-import java.util.regex.Pattern
 
 object JapaneseTokenizer : Tokenizer {
     override var dictionary: ArrayList<DerivatableWord> = arrayListOf()
@@ -43,7 +42,7 @@ object JapaneseTokenizer : Tokenizer {
                 PREFER_PARENT -> kanjiWord
                 PREFER_DERIVATION -> {
                     @Suppress("UNNECESSARY_SAFE_CALL")
-                    kanjiWord.derivations?.firstOrNull { original.contains(it.word) } ?: kanjiWord
+                    kanjiWord.derivations?.find { original.startsWith(it.word) } ?: kanjiWord
                 }
             }
         }
