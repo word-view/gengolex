@@ -18,6 +18,11 @@ import kotlin.collections.flatten
 interface Tokenizer {
     val dictionary: ArrayList<DerivatableWord>
 
+    companion object {
+        private val gson = Gson()
+        private val typeToken = object : TypeToken<List<DerivatableWord>>() {}.type
+    }
+
     fun tokenize(words: List<String>): ArrayList<Word>
 
     fun initializeDictionary(path: String)
@@ -29,9 +34,6 @@ interface Tokenizer {
             throw NoDictionaryException("Unable to find a dictionary for $lang")
 
         runBlocking(Dispatchers.IO) {
-            val typeToken = object : TypeToken<List<DerivatableWord>>() {}.type
-            val gson = Gson()
-
             val parsedDictionaries = files.map { file ->
                 async {
                     val content = file.inputStream().use { it.readBytes().toString(Charsets.UTF_8) }
@@ -46,15 +48,9 @@ interface Tokenizer {
     fun initializeDictionary(dictionaries: HashMap<String, String>)
 
     fun initializeDictionary(dictionaries: HashMap<String, String>, lang: String) {
-        val hashmapDictionary = dictionaries[lang]
+        val hashmapDictionary = dictionaries[lang] ?: throw NoDictionaryException("Unable to find a dictionary for $lang")
 
-        if (hashmapDictionary.isNullOrEmpty())
-            throw NoDictionaryException("Unable to find a dictionary for $lang")
-
-        val typeToken = object : TypeToken<List<DerivatableWord>>() {}.type
-
-        val parsedDictionary = Gson().fromJson<List<DerivatableWord>>(hashmapDictionary, typeToken)
-
+        val parsedDictionary = gson.fromJson<List<DerivatableWord>>(hashmapDictionary, typeToken)
         dictionary.addAll(parsedDictionary)
     }
 }
