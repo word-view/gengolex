@@ -33,6 +33,10 @@ interface Tokenizer {
         val files = dictionaryDir.listFiles()?.filter { it.isFile && it.name.endsWith(".json") } ?:
             throw NoDictionaryException("Unable to find a dictionary for $lang")
 
+        dictionary.clear()
+        // at the moment of this commit the largest dictionary contains 38 words,
+        dictionary.ensureCapacity(50)
+
         runBlocking(Dispatchers.IO) {
             val parsedDictionaries = files.map { file ->
                 async {
@@ -49,6 +53,10 @@ interface Tokenizer {
 
     fun initializeDictionary(dictionaries: HashMap<String, String>, lang: String) {
         val hashmapDictionary = dictionaries[lang] ?: throw NoDictionaryException("Unable to find a dictionary for $lang")
+
+        dictionary.clear()
+        // at the moment of this commit the largest dictionary contains 38 words,
+        dictionary.ensureCapacity(50)
 
         val parsedDictionary = gson.fromJson<List<DerivatableWord>>(hashmapDictionary, typeToken)
         dictionary.addAll(parsedDictionary)
