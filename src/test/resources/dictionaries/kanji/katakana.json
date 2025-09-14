@@ -1,0 +1,22 @@
+[
+  {
+    "parent": "",
+    "word": "ア",
+    "derivations": [
+      {
+        "parent": "hideout",
+        "word": "アジト"
+      }
+    ]
+  },
+  {
+    "parent": "",
+    "word": "パ",
+    "derivations": [
+      {
+        "parent": "computer",
+        "word": "パソコン"
+      }
+    ]
+  }
+]

@@ -152,10 +152,18 @@ class ParserTest : GengolexTest() {
         words = parser.findWords("走る、走ってた、僕は走っています。")
         assertEquals(3, words.size)
 
+        // hiragana
         words = parser.findWords("お誕生日おめでとう")
         assertEquals(1, words.size)
 
         words = parser.findWords("早く行けお願い")
+        assertEquals(1, words.size)
+
+        // katakana
+        words = parser.findWords("アジトに行こうぜ")
+        assertEquals(1, words.size)
+
+        words = parser.findWords("俺のパソコンが遅い")
         assertEquals(1, words.size)
     }
 

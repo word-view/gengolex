@@ -27,8 +27,10 @@ object JapaneseTokenizer : Tokenizer {
             val char = chars[i].toString()
 
             // tokenize hiragana first to parse kanji words that are prefixed with a kana character (e.g. お願い， お姉さん)
-            val foundWord = tokenizeHiragana(char, input.substring(i)) ?:
-                tokenizeKanji(char, input.substring(i))
+            val foundWord =
+                tokenizeHiragana(char, input.substring(i)) ?:
+                tokenizeKanji(char, input.substring(i)) ?:
+                tokenizeKatakana(char, input.substring(i))
 
             foundWord?.let {
                 wordsFound.add(it)
@@ -37,6 +39,21 @@ object JapaneseTokenizer : Tokenizer {
         }
 
         return wordsFound
+    }
+
+    private fun tokenizeKatakana(char: String, original: String): Word? {
+        if (char.isEmpty() || char[0].code !in 0x30A0..0x30FF) return null
+
+        wordMap[char]?.let { katakanaWord ->
+            @Suppress("UNNECESSARY_SAFE_CALL")
+            val word = katakanaWord.derivations?.find { original.startsWith(it.word) } ?: katakanaWord
+
+            // A single katakana character cannot constitute a word
+            return if (word.word.length == 1 && word.word == char) null
+            else word
+        }
+
+        return null
     }
 
     private fun tokenizeHiragana(char: String, original: String): Word? {
