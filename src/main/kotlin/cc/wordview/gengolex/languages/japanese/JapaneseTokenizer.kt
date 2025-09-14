@@ -28,9 +28,9 @@ object JapaneseTokenizer : Tokenizer {
 
             // tokenize hiragana first to parse kanji words that are prefixed with a kana character (e.g. お願い， お姉さん)
             val foundWord =
-                tokenizeHiragana(char, input.substring(i)) ?:
+                tokenizeHiragana(char, input.substring(i), wordsFound) ?:
                 tokenizeKanji(char, input.substring(i)) ?:
-                tokenizeKatakana(char, input.substring(i))
+                tokenizeKatakana(char, input.substring(i), wordsFound)
 
             foundWord?.let {
                 wordsFound.add(it)
@@ -41,31 +41,35 @@ object JapaneseTokenizer : Tokenizer {
         return wordsFound
     }
 
-    private fun tokenizeKatakana(char: String, original: String): Word? {
+    private fun tokenizeKatakana(char: String, original: String, wordsFound: ArrayList<Word>): Word? {
+        if (wordsFound.any { it.word == char }) return null
         if (char.isEmpty() || char[0].code !in 0x30A0..0x30FF) return null
 
         wordMap[char]?.let { katakanaWord ->
-            @Suppress("UNNECESSARY_SAFE_CALL")
-            val word = katakanaWord.derivations?.find { original.startsWith(it.word) } ?: katakanaWord
-
-            // A single katakana character cannot constitute a word
-            return if (word.word.length == 1 && word.word == char) null
-            else word
+            return when (kanjiStrategy) {
+                PREFER_PARENT -> katakanaWord
+                PREFER_DERIVATION -> {
+                    @Suppress("UNNECESSARY_SAFE_CALL")
+                    katakanaWord.derivations?.find { original.startsWith(it.word) }
+                }
+            }
         }
 
         return null
     }
 
-    private fun tokenizeHiragana(char: String, original: String): Word? {
+    private fun tokenizeHiragana(char: String, original: String, wordsFound: ArrayList<Word>): Word? {
+        if (wordsFound.any { it.word == char }) return null
         if (char.isEmpty() || char[0].code !in 0x3040..0x309F) return null
 
         wordMap[char]?.let { hiraganaWord ->
-            @Suppress("UNNECESSARY_SAFE_CALL")
-            val word = hiraganaWord.derivations?.find { original.startsWith(it.word) } ?: hiraganaWord
-
-            // A single hiragana character cannot constitute a word
-            return if (word.word.length == 1 && word.word == char) null
-            else word
+            return when (kanjiStrategy) {
+                PREFER_PARENT -> hiraganaWord
+                PREFER_DERIVATION -> {
+                    @Suppress("UNNECESSARY_SAFE_CALL")
+                    hiraganaWord.derivations?.find { original.startsWith(it.word) }
+                }
+            }
         }
 
         return null
