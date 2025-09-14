@@ -1,0 +1,16 @@
+[
+  {
+    "parent": "",
+    "word": "お",
+    "derivations": [
+      {
+        "parent": "please",
+        "word": "お願い"
+      },
+      {
+        "parent": "congratulations",
+        "word": "おめでとう"
+      }
+    ]
+  }
+]
